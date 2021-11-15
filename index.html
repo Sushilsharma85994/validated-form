@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background: url('https://cdn.pixabay.com/photo/2020/08/09/14/25/business-5475659_960_720.jpg');
+            height: 100vh;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: rgb(255, 255, 255);
+        }
+
+        .left {
+            position: absolute;
+            left: 35px;
+            top: 20px;
+            display: inline-block;
+            /* border: 2px solid red; */
+            border-radius: 5px;
+        }
+
+        .left img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .mid {
+            display: block;
+            width: 40%;
+            margin: 20px auto;
+            /* border: 2px solid blue; */
+        }
+
+        .right {
+            position: absolute;
+            right: 34px;
+            top: 20px;
+            display: inline-block;
+            /* border: 2px solid yellow; */
+        }
+
+        .navbar {
+            display: inline-block;
+        }
+
+        .navbar li {
+            display: inline-block;
+            font-size: 24px;
+        }
+
+        .navbar li a {
+            color: white;
+            text-decoration: none;
+            padding: 35px 25px;
+        }
+
+        .navbar li a:hover,
+        .navbar li a.active {
+            text-decoration: underline;
+            color: gray;
+        }
+
+        .btn,
+        .search {
+            background: none;
+            color: white;
+            border: 2px solid white;
+            font-size: 24px;
+            cursor: pointer;
+            margin: 20px auto;
+            border-radius: 8px;
+            padding: 2px;
+        }
+
+        .con {
+            width: 750px;
+            margin: 50px 45px;
+            background: none;
+            color: white;
+            padding: 10px 35px;
+            border: 2px solid rgb(117, 163, 206);
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .input input {
+            text-align: center;
+            display: block;
+            width: 500px;
+            padding: 1px;
+            border: 2px solid rgb(95, 163, 190);
+            margin: 10px auto;
+            font-size: 25px;
+            border-radius: 8px;
+        }
+
+        .con h1 {
+            text-align: center;
+        }
+
+        .con button {
+            background-color: green;
+            color: rgb(255, 255, 255);
+            display: block;
+            width: 500px;
+            margin: 20px auto;
+            border-radius: 8px;
+            padding: 1px;
+        }
+
+        .form {
+            margin: 50px;
+            background-color: none;
+            height: 350px;
+            width: 500px;
+        }
+
+        .login {
+            padding: 20px 70px;
+        }
+
+        .login .font {
+            font-size: 18px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        .login input {
+            text-align: center;
+            display: block;
+            width: 500px;
+            padding: 1px;
+            border: 2px solid green;
+            margin: 10px auto;
+            font-size: 25px;
+            border-radius: 8px;
+        }
+
+
+        .login .font2 {
+            font-size: 18px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        .login button {
+            margin: 45px 0 30px 0;
+            height: 45px;
+            width: 500px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .login #pass_error,
+        .login #email_error {
+            margin: 5px;
+            width: 500px;
+            font-size: 18px;
+            color: red;
+            background-color: rgba(255, 0, 0, 0.2);
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="left">
+            <!-- left side for logo -->
+            <img src="https://cdn.pixabay.com/photo/2015/05/22/20/29/web-design-779697_960_720.png" alt="">
+        </div>
+        <div class="mid">
+            <!-- mid side is fornave bar -->
+            <ul class="navbar">
+                <li><a href="#" class="active">home</a></li>
+                <li><a href="#">services</a></li>
+                <li><a href="#">contact</a></li>
+                <li><a href="#">about</a></li>
+            </ul>
+        </div>
+        <div class="right">
+            <!-- rifht side is for search bar -->
+            <input class="search" type="text" name="search" placeholder="search">
+            <button class="btn">search</button>
+        </div>
+    </header>
+    <div class="con">
+        <h1>User login</h1>
+        <div class="form">
+            <form action="#btn" class="login" method="post" name="form" onsubmit="return validated()">
+                <div class="font">Email or Phone</div>
+                <input type="text" name="email">
+                <div id="email_error">Please fill up your email or phone</div>
+                <div class="font2">Password</div>
+                <input type="passwod" name="password">
+                <div id="pass_error">Please fill up your password</div>
+                <button id="successfull_login" onClick="myFunction()">log in</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+<!-- <script src="index.js"></script> -->
+<script>
+    var email = document.forms['form']['email'];
+    var password = document.forms['form']['password'];
+
+    var email_error = document.getElementById('email_error');
+    var pass_error = document.getElementById('pass_error');
+
+    email.addEventListener('textInput', email_error);
+    password.addEventListener('textInput', pass_error);
+
+    function validated() {
+        if (email.value.length < 9) {
+            email.style.border = "1px solid red";
+            email_error.style.display = "block";
+            email.focus();
+            return false;
+        }
+        if (password.value.length < 9) {
+            password.style.border = "1px solid red";
+            pass_error.style.display = "block   ";
+            password.focus();
+            return false;
+        }
+    }
+    function email_Verify() {
+        if (email.value.length >= 8) {
+            email.style.border = "1px solid black";
+            email_error.style.display = "none";
+            return true;
+        }
+    }
+    function pass_Verify() {
+        if (password.value.length >= 8) {
+            password.style.border = "1px solid black";
+            pass_error.style.display = "none";
+            return true;
+        }
+    }
+    function myFunction() {
+        alert("successfull login");
+    }
+
+</script>
+
+</html>
